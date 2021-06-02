@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>搜索结果</title>
+    <link rel="stylesheet" href="../assets/libs/particles/css/style.css">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+</head>
+
+<body>
+    <!-- particles.js container -->
+    <div id="particles-js"></div>
+    <script type="text/javascript" src="https://i.snssdk.com/search/api/study/"></script>
+
+    <div class="results-search-box">
+        <input id="searchMsg" class="search-txt" type="text" name="" placeholder="Type to search">
+        <a class="search-btn" onclick="doSearch()" id="btn">
+            <i class="fas fa-search"></i>
+        </a>
+        <ul id="list">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div class="page-box">
+        <input id="pageMsg" class="search-txt" type="text" name="" placeholder="当前位于第1页">
+        <a class="search-btn" onclick="goPage()" id="btn">
+            <i class="fas fa-search"></i>
+        </a>
+        <ul id="list">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div>
+        <spen style="font-size: 11px;color:white;" id="result_amount">搜索为您找到相关结果约100,000,000个</spen>
+    </div>
+
+    <div id="results1" class="results1">
+        <div class="results-block">
+            <div class="results-title ">
+                <a href=" " style="color: blue;">无结果</a>
+            </div>
+            <div class="results-description ">
+                <spen style="font-size: 12px; ">当前关键词无更多结果。</spen>
+            </div>
+        </div>
+
+        <div class="results-block">
+            <div class="results-title ">
+                <a href=" " style="color: blue;">无结果</a>
+            </div>
+            <div class="results-description ">
+                <spen style="font-size: 12px; ">当前关键词无更多结果。</spen>
+            </div>
+        </div>
+
+        <div class="results-block">
+            <div class="results-title ">
+                <a href=" " style="color: blue;">无结果</a>
+            </div>
+            <div class="results-description ">
+                <spen style="font-size: 12px; ">当前关键词无更多结果。</spen>
+            </div>
+        </div>
+
+        <div class="results-block">
+            <div class="results-title ">
+                <a href=" " style="color: blue;">无结果</a>
+            </div>
+            <div class="results-description ">
+                <spen style="font-size: 12px; ">当前关键词无更多结果。</spen>
+            </div>
+        </div>
+
+        <div class="results-block">
+            <div class="results-title ">
+                <a href=" " style="color: blue;">无结果</a>
+            </div>
+            <div class="results-description ">
+                <spen style="font-size: 12px; ">当前关键词无更多结果。</spen>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="results2" class="results2">
+        <div class="results-block">
+            <div class="results-title ">
+                <a href=" " style="color: blue;">无结果</a>
+            </div>
+            <div class="results-description ">
+                <spen style="font-size: 12px; ">当前关键词无更多结果。</spen>
+            </div>
+        </div>
+
+        <div class="results-block">
+            <div class="results-title ">
+                <a href=" " style="color: blue;">无结果</a>
+            </div>
+            <div class="results-description ">
+                <spen style="font-size: 12px; ">当前关键词无更多结果。</spen>
+            </div>
+        </div>
+
+        <div class="results-block">
+            <div class="results-title ">
+                <a href=" " style="color: blue;">无结果</a>
+            </div>
+            <div class="results-description ">
+                <spen style="font-size: 12px; ">当前关键词无更多结果。</spen>
+            </div>
+        </div>
+
+        <div class="results-block">
+            <div class="results-title ">
+                <a href=" " style="color: blue;">无结果</a>
+            </div>
+            <div class="results-description ">
+                <spen style="font-size: 12px; ">当前关键词无更多结果。</spen>
+            </div>
+        </div>
+
+        <div class="results-block">
+            <div class="results-title ">
+                <a href=" " style="color: blue;">无结果</a>
+            </div>
+            <div class="results-description ">
+                <spen style="font-size: 12px; ">当前关键词无更多结果。</spen>
+            </div>
+        </div>
+
+    </div>
+
+    <button class="button" onclick="lastPage();" style="background-color: #2196f3;">上一页</button>
+    <button class="button" onclick="nextPage();" style="background-color: #21f391; top: 97%;">下一页</button>
+
+    <script>
+        var searchValue = document.getElementById("searchMsg").value;
+        var searchMsg = document.getElementById("searchMsg");
+        var pageMsg = document.getElementById("pageMsg");
+        var list = document.getElementById("list");
+        var btn = document.getElementById("btn");
+        var results1 = document.getElementById("results1");
+        var results2 = document.getElementById("results2");
+        var result_amount = document.getElementById("result_amount");
+        var mouseOver = 0;
+        var page = 0;
+
+        function lastPage() {
+            page = getQueryVariable("f");
+            searchValue = getQueryVariable("e");
+            console.log(page);
+            if (page == 0) {
+                alert("已处于第一页，无法返回上一页");
+            } else {
+                page--;
+                location.href = `results.html` +
+                    `?e=${searchValue}` + `&f=${page}`;
+            }
+        }
+
+        function nextPage() {
+            page = getQueryVariable("f");
+            searchValue = getQueryVariable("e");
+            console.log(page);
+            page++;
+            location.href = `results.html` +
+                `?e=${searchValue}` + `&f=${page}`;
+        }
+
+        function goPage() {
+            page = document.getElementById("pageMsg").value;
+            inPage = --page;
+            searchValue = getQueryVariable("e");
+            if (page < 0) {
+                alert("请输入大于零的页码");
+            } else {
+                location.href = `results.html` +
+                    `?e=${searchValue}` + `&f=${inPage}`;
+            }
+
+        }
+
+        function doSearch() {
+            searchValue = document.getElementById("searchMsg").value;
+            location.href = `results.html` +
+                `?e=${searchValue}` + `&f=${0}`;
+
+        }
+
+        //监听输入框的keuup事件，
+        searchMsg.onkeyup = function() {
+            searchValue = document.getElementById("searchMsg").value;
+            var url = "https://i.snssdk.com/search/api/sug/?keyword=" + searchValue;
+            fetch(url).then(function(response) {
+                return response.json();
+            }).then(function(json) {
+                let products = json;
+                console.log(products);
+                if (products.code != 0) {
+                    hide(list);
+                } else if (products.data.length == 0) {
+                    hide(iist);
+                } else {
+                    show(list);
+                }
+                fn(products);
+            }).catch(function(err) {
+                console.log('Fetch problem: ' + err.message);
+            });
+        }
+        list.onmouseover = function() {
+            mouseOver = 1;
+        }
+
+        list.onmouseleave = function() {
+            mouseOver = 0;
+            hide(list);
+        }
+
+        searchMsg.onblur = function() {
+                if (mouseOver == 1) {
+                    console.log("over" + mouseOver);
+                    mouseOver = 0;
+                } else {
+                    console.log("not over" + mouseOver);
+                    hide(list);
+                }
+            }
+            //点击li标签后把输入框的信息填入到文本框
+        list.onclick = function(e) {
+            console.log("click list");
+            var e = e || window.event;
+            var target = e.target || e.srcElement;
+            searchMsg.value = target.innerHTML;
+            //hide(list)
+        }
+
+        function fn(products) {
+            var lis = document.querySelectorAll('li');
+            //这时候遍历查询到的信息，放到li标签当中
+            for (var i = 0; i < products.data.length; i++) {
+                lis[i].innerHTML = products.data[i].keyword;
+            }
+        }
+
+        function hide(obj) {
+            obj.style.display = "none"
+        }
+
+        function show(obj) {
+            obj.style.display = "block"
+        }
+
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) {
+                    return pair[1];
+                }
+            }
+            return (NaN);
+        }
+
+        searchValue = getQueryVariable("e");
+        page = getQueryVariable("f");
+        var displayPage = ++page;
+        var url = 'https://i.snssdk.com/search/api/study?keyword=' + searchValue + '&offset=' + page;
+        console.log(url);
+        fetch(url).then(function(response) {
+            return response.json();
+        }).then(function(json) {
+            let products = json;
+            initialize(products);
+        }).catch(function(err) {
+            console.log('Fetch problem: ' + err.message);
+        });
+
+        function initialize(product) {
+            console.log(product);
+            result_amount.innerHTML = "搜索为您找到相关结果约" + product.total + "个,目前处于第" + displayPage + "页";
+            pageMsg.placeholder = "目前处于第" + displayPage + "页，请输入欲跳转到的页码。";
+            for (var i = 0; i < product.data.length; i++) {
+                if (i < 5) {
+                    results1.children[i].children[0].children[0].innerHTML = product.data[i].title;
+                    results1.children[i].children[0].children[0].href = product.data[i].link_url;
+                    results1.children[i].children[1].children[0].innerHTML = product.data[i].description;
+                } else {
+                    results2.children[i - 5].children[0].children[0].innerHTML = product.data[i].title;
+                    results2.children[i - 5].children[0].children[0].href = product.data[i].link_url;
+                    results2.children[i - 5].children[1].children[0].innerHTML = product.data[i].description;
+                }
+            }
+        }
+    </script>
+    <script src="../assets/libs/jquery-1.12.4/jquery.min.js"></script>
+    <script src="../assets/libs/particles/particles.min.js"></script>
+    <script src="../assets/libs/particles/js/app.js"></script>
+    <!-- <script src="../assets/libs/particles/js/lib/stats.js"></script> -->
+    <script>
+        var count_particles, stats, update;
+        stats = new Stats;
+        stats.setMode(0);
+        stats.domElement.style.position = 'absolute';
+        stats.domElement.style.left = '0px';
+        stats.domElement.style.top = '0px';
+        document.body.appendChild(stats.domElement);
+        count_particles = document.querySelector('.js-count-particles');
+        update = function() {
+            stats.begin();
+            stats.end();
+            if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+                count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+            }
+            requestAnimationFrame(update);
+        };
+        requestAnimationFrame(update);
+    </script>
+</body>
+
+</html>

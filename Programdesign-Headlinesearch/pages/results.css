@@ -1,0 +1,160 @@
+#zuobiandiv {
+    margin-top: 40px;
+    padding-right: 0;
+}
+
+#sousuokuang {
+    /*搜索框*/
+    margin-top: 5px;
+    float: left;
+}
+
+
+/*百度一下按钮*/
+
+#baiduyixia {
+    border: 1px solid cornflowerblue;
+    width: 105px;
+    height: 26px;
+    text-align: center;
+    padding-top: 2px;
+    background: #3385ff;
+    color: white;
+    float: right;
+}
+
+#baiduyixia>a {
+    text-decoration: none;
+    color: white;
+}
+
+#baiduyixia>input {
+    text-align: center;
+}
+
+
+/*右边登入*/
+
+#youbian {
+    padding-left: 90%;
+    margin-top: -2%;
+}
+
+#youbian>a {
+    font-size: 10px;
+    color: #333;
+    /*    灰色条*/
+}
+
+#zhongjiantiao {
+    margin-top: 22px;
+    margin-left: -2%;
+    border: 1px solid #F5F5F5;
+    width: 1600px;
+    height: 30px;
+    background: #f8f8f8;
+}
+
+
+/*灰色条文字*/
+
+#zhongjiantiaowenzi {
+    margin-left: 6.7%;
+    float: left;
+    margin-top: 5px;
+}
+
+#zhongjiantiaowenzi>a {
+    font-size: 13px;
+    text-decoration: none;
+    margin-left: 20px;
+    color: #323232;
+}
+
+
+/*    网页*/
+
+.wangye {
+    float: left;
+    margin-left: 100px;
+    margin-top: 10px;
+}
+
+.wangye>a {
+    font-size: 14px;
+    color: blue;
+}
+
+.wangye>a>em {
+    color: red;
+    font-style: normal;
+}
+
+
+/*    官方标志*/
+
+.xiaolan {
+    margin-top: 14px;
+    margin-left: 8px;
+    border: 1px solid cornflowerblue;
+    width: 31px;
+    height: 12.56px;
+    text-align: center;
+    background: #2b99ff;
+    color: white;
+    float: left;
+}
+
+.xiaolan>a,
+.xiaolan>a {
+    font-size: 10px;
+    color: white;
+    text-decoration: none;
+    padding-left: 5px;
+    float: left;
+}
+
+
+/*        搜索结果网页*/
+
+.wangye2 {
+    margin-top: 40px;
+    margin-left: 100px;
+}
+
+.wenzi {
+    width: 370px;
+    float: left;
+    margin-left: 15px;
+}
+
+.a {
+    font-size: 13px;
+    line-height: 34px;
+    margin-right: 10px;
+    color: black;
+}
+
+.a2 {
+    font-size: 15px;
+    margin-right: 12px;
+    line-height: 38px;
+    width: 54px;
+    height: 36px;
+    color: gray;
+    text-decoration: none;
+}
+
+.a2:hover {
+    color: black;
+}
+
+.a3 {
+    font-size: 12px;
+    color: #222eff;
+}
+
+.a4 {
+    font-size: 13px;
+    color: #A9A9A9;
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>搜索主页</title>
+    <link rel="stylesheet" href="../assets/libs/particles/css/style.css">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+</head>
+
+<body>
+    <!-- particles.js container -->
+    <div id="particles-js"></div>
+    <script type="text/javascript" src="https://i.snssdk.com/search/api/study/"></script>
+
+    <div class="search-box">
+        <input id="searchMsg" class="search-txt" type="text" name="" placeholder="Type to search">
+        <a class="search-btn" onclick="doSearch()" id="btn">
+            <i class="fas fa-search"></i>
+        </a>
+        <ul id="list">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <script>
+        //var searchValue = document.getElementById("search-txt").value;
+        var searchMsg = document.getElementById("searchMsg");
+        var list = document.getElementById("list");
+        var btn = document.getElementById("btn");
+        var mouseOver = 0;
+
+        function doSearch() {
+            searchValue = document.getElementById("searchMsg").value;
+            location.href = `results.html` +
+                `?e=${searchValue}` + `&f=0`;
+
+        }
+
+        //监听输入框的keuup事件，
+        searchMsg.onkeyup = function() {
+            searchValue = document.getElementById("searchMsg").value;
+            var url = "https://i.snssdk.com/search/api/sug/?keyword=" + searchValue;
+            fetch(url).then(function(response) {
+                return response.json();
+            }).then(function(json) {
+                let products = json;
+                console.log(products);
+                if (products.code != 0) {
+                    hide(list);
+                } else if (products.data.length == 0) {
+                    hide(iist);
+                } else {
+                    show(list);
+                }
+                fn(products);
+            }).catch(function(err) {
+                console.log('Fetch problem: ' + err.message);
+            });
+        }
+        list.onmouseover = function() {
+            mouseOver = 1;
+        }
+
+        list.onmouseleave = function() {
+            mouseOver = 0;
+            hide(list);
+        }
+
+        searchMsg.onblur = function() {
+                if (mouseOver == 1) {
+                    console.log("over" + mouseOver);
+                    mouseOver = 0;
+                } else {
+                    console.log("not over" + mouseOver);
+                    hide(list);
+                }
+            }
+            //点击li标签后把输入框的信息填入到文本框
+        list.onclick = function(e) {
+            console.log("click list");
+            var e = e || window.event;
+            var target = e.target || e.srcElement;
+            searchMsg.value = target.innerHTML;
+            //hide(list)
+        }
+
+        function fn(products) {
+            var lis = document.querySelectorAll('li');
+            //这时候遍历查询到的信息，放到li标签当中
+            for (var i = 0; i < products.data.length; i++) {
+                lis[i].innerHTML = products.data[i].keyword;
+            }
+        }
+
+        function hide(obj) {
+            obj.style.display = "none"
+        }
+
+        function show(obj) {
+            obj.style.display = "block"
+        }
+    </script>
+    <script src="../assets/libs/jquery-1.12.4/jquery.min.js"></script>
+    <script src="../assets/libs/particles/particles.min.js"></script>
+    <script src="../assets/libs/particles/js/app.js"></script>
+    <!-- <script src="../assets/libs/particles/js/lib/stats.js"></script> -->
+    <script>
+        var count_particles, stats, update;
+        stats = new Stats;
+        stats.setMode(0);
+        stats.domElement.style.position = 'absolute';
+        stats.domElement.style.left = '0px';
+        stats.domElement.style.top = '0px';
+        document.body.appendChild(stats.domElement);
+        count_particles = document.querySelector('.js-count-particles');
+        update = function() {
+            stats.begin();
+            stats.end();
+            if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+                count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+            }
+            requestAnimationFrame(update);
+        };
+        requestAnimationFrame(update);
+    </script>
+</body>
+
+</html>
